@@ -54,7 +54,7 @@ public class Console {
         printer("Select any available flights above : ");
         userSelection = scan.nextInt();
         if (cFlight.stream().filter(item->item.getId()
-        ==userSelection)!=null || userSelection < 0) {
+        ==userSelection).count()==0 || userSelection < 0) {
             System.out.println("Wrong Selection");
             return;
         } else if (userSelection == 0)
@@ -105,7 +105,6 @@ public class Console {
                             succes = true;
                         }
                     }
-
                     if (!succes)
                         printer("\nFlight cancellation is unsuccessful you do not have this flight ");
                 }

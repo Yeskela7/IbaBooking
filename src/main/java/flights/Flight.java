@@ -7,6 +7,7 @@ import converter.DateConverter;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Flight implements Serializable {
 
@@ -82,5 +83,24 @@ public class Flight implements Serializable {
     public int getNumberOfFreeSeats() {
         numberOfFreeSeats = numberOfSeats - seats.size();
         return numberOfFreeSeats;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.hashCode() != o.hashCode()) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return id == flight.id &&
+                numberOfSeats == flight.numberOfSeats &&
+                startingDate == flight.startingDate &&
+                destinationDate == flight.destinationDate &&
+                Objects.equals(startingCity, flight.startingCity) &&
+                Objects.equals(destinationCity, flight.destinationCity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, numberOfSeats, startingDate, destinationDate, startingCity, destinationCity);
     }
 }
