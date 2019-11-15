@@ -1,12 +1,14 @@
 package booking.service;
 
 import flights.Flight;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class Client {
+public class Client implements Serializable {
     private int UserId;
     private String name;
     private String surname;
@@ -17,10 +19,10 @@ public class Client {
         return MyFlights;
     }
 
-    public Client(String name, String surname) {
+    public Client(int userId,String name, String surname) {
         this.name = name;
         this.surname=surname;
-        this.UserId=rand.nextInt(1000);
+        this.UserId=userId;
     }
 
     @Override
@@ -64,9 +66,11 @@ public class Client {
 
     public boolean cancelFlight(Flight flight)
     {
-        if(!MyFlights.contains(flight))
-            return false;
+        if(!MyFlights.contains(flight)){
+            System.out.println("-");
+            return false;}
         MyFlights.remove(flight);
+        System.out.println("-");
         return true;
     }
 

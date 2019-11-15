@@ -41,6 +41,10 @@ public class FlightsController {
         flightService.addFlight(flight);
     }
 
+    public  Flight getFlightById(int flightId) throws IOException, ClassNotFoundException {
+        return flightService.getFlightById(flightId);
+    }
+
     public void createRandomFlight() throws ParseException, IOException, ClassNotFoundException {
         flightService.createRandomFlight();
     }
