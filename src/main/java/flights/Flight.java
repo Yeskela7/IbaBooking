@@ -40,15 +40,14 @@ public class Flight implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Flight{");
+        final StringBuilder sb = new StringBuilder("Flight ");
         sb.append("id: ").append(id);
-        sb.append(", number of seats: ").append(numberOfSeats);
-        sb.append(", available seats:").append(numberOfFreeSeats);
-        sb.append(", starting date: ").append(DateConverter.millsToString(startingDate));
-        sb.append(", starting city: '").append(startingCity).append('\'');
-        sb.append(", destination city: '").append(destinationCity).append('\'');
-        sb.append(", destination date: ").append(DateConverter.millsToString(destinationDate)); 
-        sb.append('}');
+        sb.append("\n      number of seats: ").append(numberOfSeats);
+        sb.append("\n      available seats:").append(numberOfFreeSeats);
+        sb.append("\n      starting city: '").append(startingCity).append('\'');
+        sb.append("\n      starting date: ").append(DateConverter.millsToString(startingDate));
+        sb.append("\n      destination city: '").append(destinationCity).append('\'');
+        sb.append("\n      destination date: ").append(DateConverter.millsToString(destinationDate));
         return sb.toString();
     }
 
