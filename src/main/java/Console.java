@@ -53,7 +53,8 @@ public class Console {
         printer(cFlight.toString() + "\n");
         printer("Select any available flights above : ");
         userSelection = scan.nextInt();
-        if (!cFlight.contains(userSelection) || userSelection < 0) {
+        if (cFlight.stream().filter(item->item.getId()
+        ==userSelection)!=null || userSelection < 0) {
             System.out.println("Wrong Selection");
             return;
         } else if (userSelection == 0)
@@ -129,7 +130,7 @@ public class Console {
 
     public void mainMenu() throws IOException, ClassNotFoundException, ParseException {
 
-        printer("\nMainMenu: \n" +
+        printer("\nMain Menu: \n" +
                 "Please enter one of the following command or use just number :\n" +
                 "1) Display All Flights\n" +
                 "2) Show FLight Info\n" +

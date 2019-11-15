@@ -42,7 +42,7 @@ public class Flight implements Serializable {
         final StringBuilder sb = new StringBuilder("Flight{");
         sb.append("id: ").append(id);
         sb.append(", number of seats: ").append(numberOfSeats);
-        sb.append(", number of available seats:").append(numberOfFreeSeats);
+        sb.append(", available seats:").append(numberOfFreeSeats);
         sb.append(", starting date: ").append(DateConverter.millsToString(startingDate));
         sb.append(", starting city: '").append(startingCity).append('\'');
         sb.append(", destination city: '").append(destinationCity).append('\'');
