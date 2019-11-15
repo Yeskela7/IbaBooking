@@ -12,7 +12,7 @@ public class StorageFlights implements Dao<Flight> {
     @Override
     public Flight get(int id) {
         try{
-        return flightList.get(id);
+        return flightList.get(id);  /// Problem is here id mut be fligoht id !
         }
         catch (IndexOutOfBoundsException ex){
             throw ex;

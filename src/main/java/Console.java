@@ -53,7 +53,8 @@ public class Console {
         printer(cFlight.toString() + "\n");
         printer("Select any available flights above : ");
         userSelection = scan.nextInt();
-        if (!cFlight.contains(userSelection) || userSelection < 0) {
+        if (cFlight.stream().filter(item -> item.getId()
+                == userSelection).count() == 0 || userSelection < 0) {
             System.out.println("Wrong Selection");
             return;
         } else if (userSelection == 0)
@@ -64,13 +65,15 @@ public class Console {
                 String name = scan.next();
                 printer("Enter surname of passenger : \n");
                 String surname = scan.next();
-                fc.addClient(userSelection, new Client(name, surname));
+                printer("Enter user ID of passenger : \n");
+                int userId = scan.nextInt();
+                fc.addClient(userSelection, new Client(userId, name, surname));
             }
         }
     }
 
     public void showFlightInfo() throws IOException, ClassNotFoundException {
-        printer("Please enter flight id : ");
+        printer("Please enter flight id : \n");
         int query = scan.nextInt();
         printer(fc.getInfoAboutFlight(query).toString());
     }
@@ -81,35 +84,13 @@ public class Console {
     }
 
     public void cancelBooking() throws IOException, ClassNotFoundException {
-
+        printer("Enter your  id");
+        int userId = scan.nextInt();
         printer("Please enter booking id :");
-        int id = scan.nextInt();
-        int counter = 1;
+        int bookingId = scan.nextInt();
 
-        for (Flight item : fc.getAllFlight()) {
-            for (HashMap.Entry<Integer, Client> entry : item.getSeats().entrySet()) {
-                if (entry.getValue().getUserId() == id) {
-                    printer("\nAll available flights :\n");
-                    for (Flight flight : entry.getValue().getMyFlights())
-                        printer(counter + ") " + flight.toString() + "\n");
-
-                    printer("Please enter flight number :");
-                    int newID = scan.nextInt();
-                    boolean succes = false;
-
-                    for (Flight flight : entry.getValue().getMyFlights()) {
-                        if (flight.getId() == newID) {
-                            printer("\nOperation successful flight canceled\n");
-                            entry.getValue().cancelFlight(flight);
-                            succes = true;
-                        }
-                    }
-
-                    if (!succes)
-                        printer("\nFlight cancellation is unsuccessful you do not have this flight ");
-                }
-            }
-        }
+        fc.getFlightById(bookingId).getSeats().get(userId).cancelFlight(fc.getFlightById(bookingId));
+        fc.getFlightById(bookingId).getSeats().remove(userId);
 
     }
 
@@ -129,7 +110,7 @@ public class Console {
 
     public void mainMenu() throws IOException, ClassNotFoundException, ParseException {
 
-        printer("\nMainMenu: \n" +
+        printer("\nMain Menu: \n" +
                 "Please enter one of the following command or use just number :\n" +
                 "1) Display All Flights\n" +
                 "2) Show FLight Info\n" +
