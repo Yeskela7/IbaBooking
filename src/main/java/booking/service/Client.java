@@ -12,24 +12,24 @@ public class Client implements Serializable {
     private int UserId;
     private String name;
     private String surname;
-    private List<Flight> MyFlights=new ArrayList<>();
-    private Random rand=new Random();
+    private List<Flight> MyFlights = new ArrayList<>();
+    private Random rand = new Random();
 
     public List<Flight> getMyFlights() {
         return MyFlights;
     }
 
-    public Client(int userId,String name, String surname) {
+    public Client(int userId, String name, String surname) {
         this.name = name;
-        this.surname=surname;
-        this.UserId=userId;
+        this.surname = surname;
+        this.UserId = userId;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass() || this.hashCode()!=o.hashCode()) return false;
-        Client client = (Client) o;
+    public boolean equals(Object that) {
+        if (this == that) return true;
+        if (that == null || getClass() != that.getClass() || this.hashCode() != that.hashCode()) return false;
+        Client client = (Client) that;
         return UserId == client.UserId &&
                 Objects.equals(name, client.name) &&
                 Objects.equals(surname, client.surname) &&
@@ -64,13 +64,11 @@ public class Client implements Serializable {
 
     }
 
-    public boolean cancelFlight(Flight flight)
-    {
-        if(!MyFlights.contains(flight)){
-            System.out.println("-");
-            return false;}
+    public boolean cancelFlight(Flight flight) {
+        if (!MyFlights.contains(flight)) {
+            return false;
+        }
         MyFlights.remove(flight);
-        System.out.println("-");
         return true;
     }
 

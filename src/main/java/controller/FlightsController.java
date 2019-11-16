@@ -15,10 +15,11 @@ public class FlightsController {
     private FlightService flightService = new FlightService();
 
     public ArrayList<Flight> getAllFlight() throws IOException, ClassNotFoundException {
-         return flightService.getAllFlight();
+        return flightService.getAllFlight();
     }
 
-    public ArrayList<Flight> getAvailableFlight(String cities, int freeSeats, Date date) throws IOException, ClassNotFoundException {
+    public ArrayList<Flight> getAvailableFlight(String cities, int freeSeats, Date date)
+            throws IOException, ClassNotFoundException {
         return flightService.getAvailableFlight(cities, freeSeats, date);
     }
 
@@ -33,15 +34,16 @@ public class FlightsController {
     public Flight getInfoAboutFlight(int flightId) throws IOException, ClassNotFoundException {
         return flightService.getInfoAboutFlight(flightId);
     }
-  
+
     public HashMap<Integer, Client> getPassengers(int flightId) throws IOException, ClassNotFoundException {
         return flightService.getPassengers(flightId);
     }
+
     public void addFlight(Flight flight) throws IOException, ClassNotFoundException {
         flightService.addFlight(flight);
     }
 
-    public  Flight getFlightById(int flightId) throws IOException, ClassNotFoundException {
+    public Flight getFlightById(int flightId) throws IOException, ClassNotFoundException {
         return flightService.getFlightById(flightId);
     }
 

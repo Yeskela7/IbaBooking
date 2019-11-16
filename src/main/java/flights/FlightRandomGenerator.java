@@ -36,18 +36,19 @@ public class FlightRandomGenerator {
     }
 
     private FlightRandomGenerator withStartingDate() {
-        startingDate = DateConverter.millsToString((long) (Calendar.getInstance().getTimeInMillis() + (DateConverter.hour(24) * Math.random())));
+        startingDate = DateConverter.millsToString((long) (Calendar.getInstance().getTimeInMillis()
+                + (DateConverter.hour(24) * Math.random())));
         return this;
     }
 
     private FlightRandomGenerator withDestinationDate() throws ParseException {
-        destinationDate = DateConverter.millsToString(DateConverter.stringToMills(startingDate) +  + DateConverter.hour(3));
+        destinationDate = DateConverter.millsToString(DateConverter.stringToMills(startingDate)
+                + DateConverter.hour(3));
         return this;
     }
 
     private FlightRandomGenerator withStartingCity() {
-        Cities startingPoint = new Cities();
-        startingCity = startingPoint.getRandomCity();
+        startingCity = "Kiev";
         return this;
     }
 

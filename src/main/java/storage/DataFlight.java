@@ -29,12 +29,12 @@ public class DataFlight {
 
     public ArrayList<Flight> loadFlight() throws IOException, ClassNotFoundException {
         File base = new File(path);
-        if (base.length() ==0){
+        if (base.length() == 0) {
             return null;
         }
         FileInputStream fis = new FileInputStream(base);
         ObjectInputStream ois = new ObjectInputStream(fis);
-        ArrayList<Flight> flights =  (ArrayList<Flight>) ois.readObject();
+        ArrayList<Flight> flights = (ArrayList<Flight>) ois.readObject();
         ois.close();
         fis.close();
         return flights;
