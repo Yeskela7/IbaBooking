@@ -12,7 +12,7 @@ public class Cities {
             "Vilnius", "Podgorica", "Amsterdam", "Oslo",
             "Skopje", "Warsaw", "Lisbon", "Bucharest",
             "Belgrade", "Madrid", "Bern", "Stockholm",
-            "London", "Kiev");
+            "London");
 
     public String getRandomCity() {
         return cities.get((int) (cities.size() * Math.random()));

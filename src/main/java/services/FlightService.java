@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 public class FlightService {
 
     private Dao<Flight> flightDao = new StorageFlights();
-    ;
 
     public ArrayList<Flight> getAllFlight() throws IOException, ClassNotFoundException {
         return flightDao.getAll();
     }
 
-    public ArrayList<Flight> getAvailableFlight(String cities, int freeSeats, Date date) throws IOException, ClassNotFoundException {
+    public ArrayList<Flight> getAvailableFlight(String cities, int freeSeats, Date date)
+            throws IOException, ClassNotFoundException {
         ArrayList<Flight> availableFlight;
         availableFlight = (ArrayList<Flight>) flightDao.getAll().stream()
                 .filter(flight -> flight.getDestinationCity().equals(cities))
@@ -33,25 +33,15 @@ public class FlightService {
                 .filter(flight -> flight.getNumberOfFreeSeats() >= freeSeats)
                 .filter(flight -> date.getTime() - DateConverter.hour(12) <= flight.getDestinationDate())
                 .collect(Collectors.toCollection(ArrayList::new)));
-        System.out.println(availableFlight);
         return availableFlight;
     }
 
     public void addClient(int flightId, Client client) throws IOException, ClassNotFoundException {
-//        if (flightDao.get(flightId).getNumberOfFreeSeats() > 0) {
-//            flightDao.get(flightId).getSeats().put(client.getUserId(), client);
-//            flightDao.update(flightDao.get(flightId));
-//            client.addFlight(flightDao.get(flightId));
-//        } else {
-//            System.out.println("add client error");
-//        }
         Flight flight = getFlightById(flightId);
         flight.getSeats().put(client.getUserId(), client);
         flightDao.update(flight);
         client.addFlight(flight);
     }
-
-
 
     public void removeClient(int flightId, Client client) throws IOException, ClassNotFoundException {
         Flight flight = getFlightById(flightId);

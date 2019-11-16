@@ -1,4 +1,5 @@
 
+import booking.controller.Controller;
 import booking.service.Client;
 import controller.FlightsController;
 import flights.Flight;
@@ -53,9 +54,9 @@ public class Console {
         printer(cFlight.toString() + "\n");
         printer("Select any available flights above : ");
         userSelection = scan.nextInt();
-        if (cFlight.stream().filter(item -> item.getId()
-                == userSelection).count() == 0 || userSelection < 0) {
-            System.out.println("Wrong Selection");
+        if (cFlight.stream().noneMatch(item -> item.getId()
+                == userSelection) || userSelection < 0) {
+            System.out.println("Wrong flight id");
             return;
         } else if (userSelection == 0)
             return;
@@ -121,19 +122,31 @@ public class Console {
                 "\n>>>");
 
         String command = scan.next().toLowerCase().replace(" ", "");
-        if (command.equals("displayallflights") || command.equals("1"))
-            showFlights();
-        else if (command.equals("showflightinfo") || command.equals("2"))
-            showFlightInfo();
-        else if (command.equals("searchandbookflight") || command.equals("3"))
-            searchAndBook();
-        else if (command.equals("cancelbooking") || command.equals("4"))
-            cancelBooking();
-        else if (command.equals("myflights") || command.equals("5"))
-            myFlight();
-        else if (command.equals("exit") || command.equals("6")) {
-            df = new DataFlight(fc);
-            System.exit(0);
+        switch (command) {
+            case "displayallflights":
+            case "1":
+                showFlights();
+                break;
+            case "showflightinfo":
+            case "2":
+                showFlightInfo();
+                break;
+            case "searchandbookflight":
+            case "3":
+                searchAndBook();
+                break;
+            case "cancelbooking":
+            case "4":
+                cancelBooking();
+                break;
+            case "myflights":
+            case "5":
+                myFlight();
+                break;
+            case "exit":
+            case "6":
+                df = new DataFlight(fc);
+                System.exit(0);
         }
     }
 
