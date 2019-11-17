@@ -82,7 +82,9 @@ public class Console {
     public void showFlightInfo() throws IOException, ClassNotFoundException {
         printer("Please enter flight id : \n");
         int query = scan.nextInt();
-        printer(fc.getFlightById(query).toString());
+        if (fc.getFlightById(query) == null) {
+            printer("No flight with this Id. ");
+        } else printer(fc.getFlightById(query).toString());
     }
 
     public void showFlights() throws IOException, ClassNotFoundException {

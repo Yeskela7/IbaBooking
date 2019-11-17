@@ -54,9 +54,13 @@ public class FlightService {
     }
 
     public Flight getFlightById(int flightId) throws IOException, ClassNotFoundException {
-        return flightDao.getAll().stream()
-                .filter(flight1 -> flight1.getId() == flightId)
-                .collect(Collectors.toList()).get(0);
+        try {
+            return flightDao.getAll().stream()
+                    .filter(flight1 -> flight1.getId() == flightId)
+                    .collect(Collectors.toList()).get(0);
+        } catch (IndexOutOfBoundsException ex) {
+            return null;
+        }
     }
 
     public void createRandomFlight() throws ParseException, IOException, ClassNotFoundException {
