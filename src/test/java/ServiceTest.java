@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceTest {
 
-    Service service = new Service();
+    private Service service = new Service();
 
 
     @Test
@@ -46,11 +46,11 @@ class ServiceTest {
         client.addFlight(flight);
         assertEquals(true, service.cancelBooking(client, 2));
 
-        Flight fligh2 = new Flight(3, 111, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
+        Flight flight2 = new Flight(3, 111, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
         Flight flight3 = new Flight(4, 10, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
         Flight flight4 = new Flight(5, 41, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
         client.addFlight(flight);
-        client.addFlight(fligh2);
+        client.addFlight(flight2);
         client.addFlight(flight3);
         client.addFlight(flight4);
 
