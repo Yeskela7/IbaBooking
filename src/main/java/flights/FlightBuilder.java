@@ -13,12 +13,8 @@ public class FlightBuilder {
     private int id;
     private int numberOfSeats;
     private HashMap<Integer, Client> seats;
-
     private String startingDate;
-
     private String destinationDate;
-
-
     private String startingCity;
     private String destinationCity;
 
