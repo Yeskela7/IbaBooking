@@ -6,7 +6,6 @@ import converter.DateConverter;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class FlightRandomGenerator {
     private int id;
