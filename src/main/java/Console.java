@@ -87,7 +87,7 @@ public class Console {
     }
 
     public void cancelBooking() throws IOException, ClassNotFoundException {
-        printer("Enter your  id");
+        printer("Enter your  id : ");
         int userId = scan.nextInt();
         printer("Please enter booking id :");
         int bookingId = scan.nextInt();

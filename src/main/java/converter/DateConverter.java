@@ -19,7 +19,7 @@ public class DateConverter {
         try {
             return formatForDate.parse(string).getTime();
         } catch (ParseException ex) {
-            throw new ParseException("Incorrect input. enter date in format: HH:mm dd/MM/yyyy", 0);
+            return 0;
         }
     }
 
