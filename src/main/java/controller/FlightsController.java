@@ -31,10 +31,6 @@ public class FlightsController {
         flightService.removeClient(flightId, client);
     }
 
-    public Flight getInfoAboutFlight(int flightId) throws IOException, ClassNotFoundException {
-        return flightService.getInfoAboutFlight(flightId);
-    }
-
     public HashMap<Integer, Client> getPassengers(int flightId) throws IOException, ClassNotFoundException {
         return flightService.getPassengers(flightId);
     }

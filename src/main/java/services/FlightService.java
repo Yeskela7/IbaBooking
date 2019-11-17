@@ -26,13 +26,9 @@ public class FlightService {
         availableFlight = (ArrayList<Flight>) flightDao.getAll().stream()
                 .filter(flight -> flight.getDestinationCity().equals(cities))
                 .filter(flight -> flight.getNumberOfFreeSeats() >= freeSeats)
-                .filter(flight -> date.getTime() + DateConverter.hour(12) >= flight.getDestinationDate())
+                .filter(flight -> date.getTime() - flight.getDestinationDate() >= -DateConverter.hour(12))
+                .filter(flight -> date.getTime() - flight.getDestinationDate() < DateConverter.hour(12))
                 .collect(Collectors.toList());
-        availableFlight.addAll(flightDao.getAll().stream()
-                .filter(flight -> flight.getDestinationCity().equals(cities))
-                .filter(flight -> flight.getNumberOfFreeSeats() >= freeSeats)
-                .filter(flight -> date.getTime() - DateConverter.hour(12) <= flight.getDestinationDate())
-                .collect(Collectors.toCollection(ArrayList::new)));
         return availableFlight;
     }
 
@@ -47,10 +43,6 @@ public class FlightService {
         Flight flight = getFlightById(flightId);
         flight.getSeats().remove(client.getUserId(), client);
         client.cancelFlight(flight);
-    }
-
-    public Flight getInfoAboutFlight(int flightId) throws IOException, ClassNotFoundException {
-        return getFlightById(flightId);
     }
 
     public HashMap<Integer, Client> getPassengers(int flightId) throws IOException, ClassNotFoundException {

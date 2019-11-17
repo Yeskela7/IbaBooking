@@ -41,7 +41,7 @@ public class Console {
 
         printer("Please enter destination city : ");
         city = scan.next();
-        printer("Please enter date : ");
+        printer("Please enter date in format (12:00 01/12/2019) : ");
         data = "";
         data += scan.nextLine();
         data += scan.nextLine();
@@ -75,7 +75,7 @@ public class Console {
     public void showFlightInfo() throws IOException, ClassNotFoundException {
         printer("Please enter flight id : \n");
         int query = scan.nextInt();
-        printer(fc.getInfoAboutFlight(query).toString());
+        printer(fc.getFlightById(query).toString());
     }
 
     public void showFlights() throws IOException, ClassNotFoundException {
