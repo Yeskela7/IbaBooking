@@ -12,11 +12,11 @@ public class Client implements Serializable {
     private int UserId;
     private String name;
     private String surname;
-    private List<Flight> MyFlights = new ArrayList<>();
+    private List<Flight> myFlights = new ArrayList<>();
     private Random rand = new Random();
 
     public List<Flight> getMyFlights() {
-        return MyFlights;
+        return myFlights;
     }
 
     public Client(int userId, String name, String surname) {
@@ -33,12 +33,12 @@ public class Client implements Serializable {
         return UserId == client.UserId &&
                 Objects.equals(name, client.name) &&
                 Objects.equals(surname, client.surname) &&
-                Objects.equals(MyFlights, client.MyFlights);
+                Objects.equals(myFlights, client.myFlights);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(UserId, name, surname, MyFlights, rand);
+        return Objects.hash(UserId, name, surname, myFlights, rand);
     }
 
 
@@ -47,7 +47,7 @@ public class Client implements Serializable {
                 "UserId=" + UserId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", MyFlights=" + MyFlights +
+                ", MyFlights=" + myFlights +
                 '}';
     }
 
@@ -60,15 +60,15 @@ public class Client implements Serializable {
     }
 
     public void addFlight(Flight flight) {
-        MyFlights.add(flight);
+        myFlights.add(flight);
 
     }
 
     public boolean cancelFlight(Flight flight) {
-        if (!MyFlights.contains(flight)) {
+        if (!myFlights.contains(flight)) {
             return false;
         }
-        MyFlights.remove(flight);
+        myFlights.remove(flight);
         return true;
     }
 
