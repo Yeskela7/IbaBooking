@@ -1,12 +1,7 @@
 package flights;
 
 import booking.service.Client;
-import converter.DateConverter;
-
 import java.text.ParseException;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 public class FlightBuilder {
