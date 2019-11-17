@@ -47,7 +47,9 @@ public class ClientsStorage implements Dao<Client> {
         try {
             AllClients.forEach(client -> {
                 if (client.getUserId() == id) AllClients.remove(client);
+
             });
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no client with this id");
         }

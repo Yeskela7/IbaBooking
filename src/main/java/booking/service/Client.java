@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Client implements Serializable {
-    private int UserId;
+    private int userId;
     private String name;
     private String surname;
     private List<Flight> MyFlights = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Client implements Serializable {
     public Client(int userId, String name, String surname) {
         this.name = name;
         this.surname = surname;
-        this.UserId = userId;
+        this.userId = userId;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Client implements Serializable {
         if (this == that) return true;
         if (that == null || getClass() != that.getClass() || this.hashCode() != that.hashCode()) return false;
         Client client = (Client) that;
-        return UserId == client.UserId &&
+        return userId == client.userId &&
                 Objects.equals(name, client.name) &&
                 Objects.equals(surname, client.surname) &&
                 Objects.equals(MyFlights, client.MyFlights);
@@ -38,13 +38,13 @@ public class Client implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(UserId, name, surname, MyFlights, rand);
+        return Objects.hash(userId, name, surname, MyFlights, rand);
     }
 
 
     public String toString() {
         return "Client{" +
-                "UserId=" + UserId +
+                "UserId=" + userId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", MyFlights=" + MyFlights +
@@ -73,6 +73,6 @@ public class Client implements Serializable {
     }
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 }
