@@ -1,5 +1,4 @@
 
-import booking.controller.Controller;
 import booking.service.Client;
 import controller.FlightsController;
 import flights.Flight;
@@ -42,10 +41,13 @@ public class Console {
 
         printer("Please enter destination city : ");
         city = scan.next();
-        printer("Please enter date : ");
+        printer("Please enter date\n");
         data = "";
-        data += scan.nextLine();
-        data += scan.nextLine();
+        printer("Enter time (HH:mm) : ");
+        data += scan.next();
+        printer("Enter date (dd/MM/yyyy) : ");
+        data += " ";
+        data += scan.next();
         date = converter.DateConverter.stringToMills(data);
         printer("Please how many people will travel : ");
         people = scan.nextInt();
@@ -76,7 +78,7 @@ public class Console {
     public void showFlightInfo() throws IOException, ClassNotFoundException {
         printer("Please enter flight id : \n");
         int query = scan.nextInt();
-        printer(fc.getInfoAboutFlight(query).toString());
+        printer(fc.getFlightById(query).toString());
     }
 
     public void showFlights() throws IOException, ClassNotFoundException {
