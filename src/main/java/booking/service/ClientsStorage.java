@@ -1,6 +1,5 @@
 package booking.service;
 
-
 import dao.Dao;
 
 import java.io.FileWriter;

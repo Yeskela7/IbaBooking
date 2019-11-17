@@ -1,6 +1,7 @@
 package booking.service;
 
 import dao.Dao;
+import flights.Flight;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,15 +13,14 @@ public class Service {
     private File file = new File("./clientsData.txt");
 
     public boolean cancelBooking(Client client, int FlightId) {
-        try {
-            client.getMyFlights().forEach(flight -> {
-                if (flight.getId() == FlightId) ;
-                client.cancelFlight(flight);
-            });
-            return true;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
+
+        for (Flight fl : client.getMyFlights()) {
+            if (fl.getId() == FlightId) {
+                client.cancelFlight(fl);
+                return true;
+            }
         }
+        return false;
     }
 
     public void addToDataBase(Client client) throws IOException {

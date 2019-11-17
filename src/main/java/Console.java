@@ -49,6 +49,10 @@ public class Console {
         printer("Enter 'Date' in format dd/MM/yyyy : ");
         data += scan.next();
         date = converter.DateConverter.stringToMills(data);
+        if (date == 0) {
+            printer("Wrong date input. Please enter date cin correct format. \n");
+            return;
+        }
         printer("Please how many people will travel : ");
         people = scan.nextInt();
         ArrayList<Flight> cFlight = fc.getAvailableFlight(city, people, new Date(date));
