@@ -9,20 +9,20 @@ import java.util.NoSuchElementException;
 
 public class ClientsStorage implements Dao<Client> {
 
-    private ArrayList<Client> AllClients = new ArrayList<>();
+    private ArrayList<Client> allClients = new ArrayList<>();
     private FileWriter writer;
 
     public ArrayList<Client> getAll() {
-        return AllClients;
+        return allClients;
     }
 
     @Override
     public void save(Client data) {
-        AllClients.add(data);
+        allClients.add(data);
     }
 
     public Client get(int id) {
-        for (Client client : AllClients) {
+        for (Client client : allClients) {
             if (client.getUserId() == id)
                 return client;
         }
@@ -30,7 +30,7 @@ public class ClientsStorage implements Dao<Client> {
     }
 
     public int clientId(Client client) {
-        for (Client client1 : AllClients) {
+        for (Client client1 : allClients) {
             if (client1.equals(client))
                 return client1.getUserId();
         }
@@ -40,13 +40,13 @@ public class ClientsStorage implements Dao<Client> {
 
     @Override
     public void update(Client data) {
-        AllClients.set(AllClients.indexOf(data), data);
+        allClients.set(allClients.indexOf(data), data);
     }
 
     public void deleteById(int id) {
         try {
-            AllClients.forEach(client -> {
-                if (client.getUserId() == id) AllClients.remove(client);
+            allClients.forEach(client -> {
+                if (client.getUserId() == id) allClients.remove(client);
 
             });
 
@@ -58,9 +58,9 @@ public class ClientsStorage implements Dao<Client> {
     @Override
     public void deleteByObject(Client client) {
         try {
-            AllClients.forEach(client1 -> {
+            allClients.forEach(client1 -> {
                 if (client1.equals(client)) ;
-                AllClients.remove(client);
+                allClients.remove(client);
             });
         } catch (IndexOutOfBoundsException e) {
             System.out.println("No client");
