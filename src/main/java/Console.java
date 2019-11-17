@@ -97,10 +97,12 @@ public class Console {
         int userId = scan.nextInt();
         printer("Please enter booking id :");
         int bookingId = scan.nextInt();
-
-        fc.getFlightById(bookingId).getSeats().get(userId).cancelFlight(fc.getFlightById(bookingId));
-        fc.getFlightById(bookingId).getSeats().remove(userId);
-
+        try {
+            fc.getFlightById(bookingId).getSeats().get(userId).cancelFlight(fc.getFlightById(bookingId));
+            fc.getFlightById(bookingId).getSeats().remove(userId);
+        } catch (NullPointerException ex) {
+            printer("Incorrect input");
+        }
     }
 
 
