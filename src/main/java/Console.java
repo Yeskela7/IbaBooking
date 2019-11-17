@@ -41,10 +41,13 @@ public class Console {
 
         printer("Please enter destination city : ");
         city = scan.next();
-        printer("Please enter date : ");
+        printer("Please enter date\n");
         data = "";
-        data += scan.nextLine();
-        data += scan.nextLine();
+        printer("Enter 'Time' in format HH:mm : ");
+        data += scan.next();
+        data += " ";
+        printer("Enter 'Date' in format dd/MM/yyyy : ");
+        data += scan.next();
         date = converter.DateConverter.stringToMills(data);
         printer("Please how many people will travel : ");
         people = scan.nextInt();
@@ -75,7 +78,7 @@ public class Console {
     public void showFlightInfo() throws IOException, ClassNotFoundException {
         printer("Please enter flight id : \n");
         int query = scan.nextInt();
-        printer(fc.getInfoAboutFlight(query).toString());
+        printer(fc.getFlightById(query).toString());
     }
 
     public void showFlights() throws IOException, ClassNotFoundException {
