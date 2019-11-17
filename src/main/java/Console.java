@@ -41,10 +41,13 @@ public class Console {
 
         printer("Please enter destination city : ");
         city = scan.next();
-        printer("Please enter date in format (12:00 01/12/2019) : ");
+        printer("Please enter date\n");
         data = "";
-        data += scan.nextLine();
-        data += scan.nextLine();
+        printer("Enter 'Time' in format HH:mm : ");
+        data += scan.next();
+        data += " ";
+        printer("Enter 'Time' in format dd/MM/yyyy : ");
+        data += scan.next();
         date = converter.DateConverter.stringToMills(data);
         printer("Please how many people will travel : ");
         people = scan.nextInt();

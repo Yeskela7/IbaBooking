@@ -43,7 +43,7 @@ public class Flight implements Serializable {
         final StringBuilder sb = new StringBuilder("Flight ");
         sb.append("Id: ").append(id);
         sb.append("\n      Number of seats: ").append(numberOfSeats);
-        sb.append("\n      Available seats:").append(getNumberOfFreeSeats());
+        sb.append("\n      Available seats: ").append(getNumberOfFreeSeats());
         sb.append("\n      Starting city: '").append(startingCity).append('\'');
         sb.append(" Starting date: ").append(DateConverter.millsToString(startingDate));
         sb.append("\n      Destination city: '").append(destinationCity).append('\'');
@@ -86,11 +86,11 @@ public class Flight implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this.hashCode() != o.hashCode()) return false;
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Flight flight = (Flight) o;
+    public boolean equals(Object that) {
+        if (this.hashCode() != that.hashCode()) return false;
+        if (this == that) return true;
+        if (that == null || getClass() != that.getClass()) return false;
+        Flight flight = (Flight) that;
         return id == flight.id &&
                 numberOfSeats == flight.numberOfSeats &&
                 startingDate == flight.startingDate &&
