@@ -1,11 +1,11 @@
-package storage;
+package dao.storages;
 
-import dao.Dao;
+import dao.interfaces.Dao;
 import flights.Flight;
 
 import java.util.ArrayList;
 
-public class StorageFlights implements Dao<Flight> {
+public class FlightsDaoStorage implements Dao<Flight> {
 
     private ArrayList<Flight> flightList = new ArrayList<>();
 

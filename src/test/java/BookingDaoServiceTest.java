@@ -1,5 +1,5 @@
-import booking.service.Client;
-import booking.service.Service;
+import booking.Client;
+import dao.services.BookingDaoService;
 import flights.Flight;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +10,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServiceTest {
+class BookingDaoServiceTest {
 
-    private Service service = new Service();
+    private BookingDaoService bookingDaoService = new BookingDaoService();
 
 
     @Test
@@ -29,10 +29,10 @@ class ServiceTest {
     @Test
     void get() throws IOException, ClassNotFoundException {
         Client client = new Client(44, "Petr", "Mitrich");
-        assertNull(service.service.get(2));
+        assertNull(bookingDaoService.service.get(2));
 
-        service.service.save(client);
-        assertEquals(client, service.service.get(44));
+        bookingDaoService.service.save(client);
+        assertEquals(client, bookingDaoService.service.get(44));
     }
 
     @Test
@@ -44,7 +44,7 @@ class ServiceTest {
         Flight flight = new Flight(2, 100, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
 
         client.addFlight(flight);
-        assertEquals(true, service.cancelBooking(client, 2));
+        assertEquals(true, bookingDaoService.cancelBooking(client, 2));
 
         Flight flight2 = new Flight(3, 111, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
         Flight flight3 = new Flight(4, 10, "11:21 01/11/2019", "11:21 21/11/2019", "London", "New-York");
@@ -54,11 +54,11 @@ class ServiceTest {
         client.addFlight(flight3);
         client.addFlight(flight4);
 
-        assertEquals(true, service.cancelBooking(client, 2));
-        assertEquals(true, service.cancelBooking(client, 3));
-        assertEquals(false, service.cancelBooking(client, 2121));
-        assertEquals(true, service.cancelBooking(client, 4));
-        assertEquals(true, service.cancelBooking(client, 5));
+        assertEquals(true, bookingDaoService.cancelBooking(client, 2));
+        assertEquals(true, bookingDaoService.cancelBooking(client, 3));
+        assertEquals(false, bookingDaoService.cancelBooking(client, 2121));
+        assertEquals(true, bookingDaoService.cancelBooking(client, 4));
+        assertEquals(true, bookingDaoService.cancelBooking(client, 5));
     }
 
 }

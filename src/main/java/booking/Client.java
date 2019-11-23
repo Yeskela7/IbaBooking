@@ -1,4 +1,4 @@
-package booking.service;
+package booking;
 
 import flights.Flight;
 
@@ -32,13 +32,12 @@ public class Client implements Serializable {
         Client client = (Client) that;
         return userId == client.userId &&
                 Objects.equals(name, client.name) &&
-                Objects.equals(surname, client.surname) &&
-                Objects.equals(myFlights, client.myFlights);
+                Objects.equals(surname, client.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, name, surname, myFlights, rand);
+        return Objects.hash(userId, name, surname);
     }
 
 
@@ -61,7 +60,6 @@ public class Client implements Serializable {
 
     public void addFlight(Flight flight) {
         myFlights.add(flight);
-
     }
 
     public boolean cancelFlight(Flight flight) {
