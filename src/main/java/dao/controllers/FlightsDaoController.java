@@ -1,8 +1,8 @@
-package controller;
+package dao.controllers;
 
-import booking.service.Client;
+import booking.Client;
 import flights.Flight;
-import services.FlightService;
+import dao.services.FlightDaoService;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,41 +10,41 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class FlightsController {
+public class FlightsDaoController {
 
-    private FlightService flightService = new FlightService();
+    private FlightDaoService flightDaoService = new FlightDaoService();
 
     public ArrayList<Flight> getAllFlight() throws IOException, ClassNotFoundException {
-        return flightService.getAllFlight();
+        return flightDaoService.getAllFlight();
     }
 
     public ArrayList<Flight> getAvailableFlight(String cities, int freeSeats, Date date)
             throws IOException, ClassNotFoundException {
-        return flightService.getAvailableFlight(cities, freeSeats, date);
+        return flightDaoService.getAvailableFlight(cities, freeSeats, date);
     }
 
     public void addClient(int flightId, Client client) throws IOException, ClassNotFoundException {
-        flightService.addClient(flightId, client);
+        flightDaoService.addClient(flightId, client);
     }
 
     public void removeClient(int flightId, Client client) throws IOException, ClassNotFoundException {
-        flightService.removeClient(flightId, client);
+        flightDaoService.removeClient(flightId, client);
     }
 
     public HashMap<Integer, Client> getPassengers(int flightId) throws IOException, ClassNotFoundException {
-        return flightService.getPassengers(flightId);
+        return flightDaoService.getPassengers(flightId);
     }
 
     public void addFlight(Flight flight) throws IOException, ClassNotFoundException {
-        flightService.addFlight(flight);
+        flightDaoService.addFlight(flight);
     }
 
     public Flight getFlightById(int flightId) throws IOException, ClassNotFoundException {
-        return flightService.getFlightById(flightId);
+        return flightDaoService.getFlightById(flightId);
     }
 
     public void createRandomFlight() throws ParseException, IOException, ClassNotFoundException {
-        flightService.createRandomFlight();
+        flightDaoService.createRandomFlight();
     }
 
 }

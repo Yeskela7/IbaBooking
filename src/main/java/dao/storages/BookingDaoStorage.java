@@ -1,12 +1,13 @@
-package booking.service;
+package dao.storages;
 
-import dao.Dao;
+import booking.Client;
+import dao.interfaces.Dao;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class ClientsStorage implements Dao<Client> {
+public class BookingDaoStorage implements Dao<Client> {
 
     private ArrayList<Client> allClients = new ArrayList<>();
     private FileWriter writer;
@@ -38,8 +39,8 @@ public class ClientsStorage implements Dao<Client> {
     }
 
     @Override
-    public void update(Client data) {
-        allClients.set(allClients.indexOf(data), data);
+    public void update(Client client) {
+        allClients.set(allClients.indexOf(client), client);
     }
 
     public void deleteById(int id) {

@@ -1,15 +1,17 @@
-package booking.service;
+package dao.services;
 
-import dao.Dao;
+import booking.Client;
+import dao.storages.BookingDaoStorage;
+import dao.interfaces.Dao;
 import flights.Flight;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Service {
+public class BookingDaoService {
 
-    public Dao<Client> service = new ClientsStorage();
+    public Dao<Client> service = new BookingDaoStorage();
     private File file = new File("./clientsData.txt");
 
     public boolean cancelBooking(Client client, int FlightId) {
@@ -23,7 +25,14 @@ public class Service {
         return false;
     }
 
-    public void addToDataBase(Client client) throws IOException {
+    public void addToDataBase(Client client) throws IOException, ClassNotFoundException {
+        for (Client oldClient : service.getAll()) {
+            if (oldClient.equals(client)) {
+                service.update(client);
+            } else {
+                service.save(client);
+            }
+        }
         FileWriter writer = new FileWriter(file);
         writer.write("\n");
         writer.write(client.toString());
@@ -35,6 +44,18 @@ public class Service {
             if (client.getName().equals(name) && client.getSurname().equals(surname)) {
                 System.out.print("Your flights: ");
                 System.out.print(client.getMyFlights());
+            }
+        }
+    }
+
+    public void addFlight(Client client, Flight flight) throws IOException, ClassNotFoundException {
+        for (Client oldClient : service.getAll()) {
+            if (oldClient.equals(client)) {
+                oldClient.addFlight(flight);
+                service.update(client);
+            } else {
+                client.addFlight(flight);
+                service.save(client);
             }
         }
     }

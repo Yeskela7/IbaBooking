@@ -1,7 +1,7 @@
 package flights;
 
 
-import booking.service.Client;
+import booking.Client;
 import converter.DateConverter;
 
 import java.io.Serializable;

@@ -1,20 +1,20 @@
-package services;
+package dao.services;
 
-import booking.service.Client;
+import booking.Client;
 import converter.DateConverter;
-import dao.Dao;
+import dao.interfaces.Dao;
 import flights.Flight;
 import flights.FlightRandomGenerator;
-import storage.StorageFlights;
+import dao.storages.FlightsDaoStorage;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FlightService {
+public class FlightDaoService {
 
-    private Dao<Flight> flightDao = new StorageFlights();
+    private Dao<Flight> flightDao = new FlightsDaoStorage();
 
     public ArrayList<Flight> getAllFlight() throws IOException, ClassNotFoundException {
         return flightDao.getAll();

@@ -1,6 +1,6 @@
-package storage;
+package flights;
 
-import controller.FlightsController;
+import dao.controllers.FlightsDaoController;
 import flights.Flight;
 
 import java.io.*;
@@ -10,7 +10,7 @@ public class DataFlight {
 
     private String path = "base.bin";
 
-    public DataFlight(FlightsController controller) throws IOException, ClassNotFoundException {
+    public DataFlight(FlightsDaoController controller) throws IOException, ClassNotFoundException {
         File base = new File(path);
         try {
             FileOutputStream fos = new FileOutputStream(base);

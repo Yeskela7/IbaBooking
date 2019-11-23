@@ -1,8 +1,9 @@
 
-import booking.service.Client;
-import controller.FlightsController;
+import booking.Client;
+import dao.controllers.BookingDaoController;
+import dao.controllers.FlightsDaoController;
 import flights.Flight;
-import storage.DataFlight;
+import flights.DataFlight;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,7 +11,8 @@ import java.util.*;
 
 public class Console {
 
-    private FlightsController fc = new FlightsController();
+    private FlightsDaoController fc = new FlightsDaoController();
+    private BookingDaoController bc = new BookingDaoController();
     private Scanner scan = new Scanner(System.in);
     private DataFlight df = new DataFlight();
     private ArrayList<Flight> flights;
@@ -54,37 +56,47 @@ public class Console {
             return;
         }
         printer("Please how many people will travel : ");
-        people = scan.nextInt();
-        ArrayList<Flight> cFlight = fc.getAvailableFlight(city, people, new Date(date));
-        System.out.println("\nMost similar results :");
-        printer(cFlight.toString() + "\n");
-        printer("Select any available flights above : ");
-        userSelection = scan.nextInt();
-        if (cFlight.stream().noneMatch(item -> item.getId()
-                == userSelection) || userSelection < 0) {
-            System.out.println("Wrong flight id");
-            return;
-        } else if (userSelection == 0)
-            return;
-        else {
-            for (int a = 0; a < people; a++) {
-                printer("Enter name of passenger : \n");
-                String name = scan.next();
-                printer("Enter surname of passenger : \n");
-                String surname = scan.next();
-                printer("Enter user ID of passenger : \n");
-                int userId = scan.nextInt();
-                fc.addClient(userSelection, new Client(userId, name, surname));
+        try {
+            people = scan.nextInt();
+            ArrayList<Flight> cFlight = fc.getAvailableFlight(city, people, new Date(date));
+            System.out.println("\nMost similar results :");
+            printer(cFlight.toString() + "\n");
+            printer("Select any available flights above : ");
+            userSelection = scan.nextInt();
+            if (cFlight.stream().noneMatch(item -> item.getId()
+                    == userSelection) || userSelection < 0) {
+                System.out.println("Wrong flight id");
+                return;
+            } else if (userSelection == 0)
+                return;
+            else {
+                for (int a = 0; a < people; a++) {
+                    printer("Enter name of passenger : \n");
+                    String name = scan.next();
+                    printer("Enter surname of passenger : \n");
+                    String surname = scan.next();
+                    printer("Enter user ID of passenger : \n");
+                    int userId = scan.nextInt();
+                    Client client = new Client(userId, name, surname);
+                    fc.addClient(userSelection, client);
+                    bc.addToDataBase(client);
+                }
             }
+        } catch (InputMismatchException ex) {
+            System.out.println("Wrong input!");
         }
     }
 
     public void showFlightInfo() throws IOException, ClassNotFoundException {
         printer("Please enter flight id : \n");
-        int query = scan.nextInt();
-        if (fc.getFlightById(query) == null) {
-            printer("No flight with this Id. ");
-        } else printer(fc.getFlightById(query).toString());
+        try {
+            int query = scan.nextInt();
+            if (fc.getFlightById(query) == null) {
+                printer("No flight with this Id. ");
+            } else printer(fc.getFlightById(query).toString());
+        } catch (InputMismatchException ex) {
+            printer("Wrong input. ");
+        }
     }
 
     public void showFlights() throws IOException, ClassNotFoundException {
@@ -93,15 +105,19 @@ public class Console {
     }
 
     public void cancelBooking() throws IOException, ClassNotFoundException {
-        printer("Enter your  id : ");
-        int userId = scan.nextInt();
-        printer("Please enter booking id :");
-        int bookingId = scan.nextInt();
         try {
-            fc.getFlightById(bookingId).getSeats().get(userId).cancelFlight(fc.getFlightById(bookingId));
-            fc.getFlightById(bookingId).getSeats().remove(userId);
-        } catch (NullPointerException ex) {
-            printer("Incorrect input");
+            printer("Enter your  id : ");
+            int userId = scan.nextInt();
+            printer("Please enter booking id :");
+            int bookingId = scan.nextInt();
+            try {
+                fc.getFlightById(bookingId).getSeats().get(userId).cancelFlight(fc.getFlightById(bookingId));
+                fc.getFlightById(bookingId).getSeats().remove(userId);
+            } catch (NullPointerException ex) {
+                printer("Incorrect input");
+            }
+        } catch (InputMismatchException ex) {
+            System.out.println("Wrong input!");
         }
     }
 

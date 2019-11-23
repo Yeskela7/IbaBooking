@@ -1,7 +1,8 @@
 package controller;
 
-import booking.service.Client;
+import booking.Client;
 import converter.DateConverter;
+import dao.controllers.FlightsDaoController;
 import flights.Flight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +13,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlightsControllerTest {
+class FlightsDaoControllerTest {
 
-    private FlightsController fc;
+    private FlightsDaoController fc;
     private Flight flight1;
     private Flight flight2;
     private Flight flight3;
@@ -22,7 +23,7 @@ class FlightsControllerTest {
 
     @BeforeEach
     void setUp() throws ParseException {
-        this.fc = new FlightsController();
+        this.fc = new FlightsDaoController();
         this.flight1 = new Flight(1337, 20, "12:00 02/11/2019",
                 "15:00 02/11/2019", "Baku", "Kiev");
         this.flight2 = new Flight(2000, 20, "15:00 02/11/2019",

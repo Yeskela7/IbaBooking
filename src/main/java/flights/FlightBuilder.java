@@ -1,6 +1,6 @@
 package flights;
 
-import booking.service.Client;
+import booking.Client;
 import java.text.ParseException;
 import java.util.HashMap;
 
